@@ -1,0 +1,118 @@
+#pragma once
+#include <iostream>
+#include <cassert>
+#include "UI.h"
+
+
+void test_add_vehicle() {
+    shared_ptr<repository::InMemory> repos = make_shared<repository::InMemory>();
+    shared_ptr<controller::AutoController> control = make_shared<controller::AutoController>(repos);
+
+    control->add_vehicle(1,"ID3", "VW", 2020, 25000, 40000, {1, 10}, 300);
+    assert(repos->getallVehicles()[0].get_model() == "ID3");
+    assert(repos->getallVehicles()[0].get_brand() == "VW");
+    assert(repos->getallVehicles()[0].get_range() == 300);
+}
+
+void test_remove_vehicle() {
+    shared_ptr<repository::InMemory> repos = make_shared<repository::InMemory>();
+    shared_ptr<controller::AutoController> control = make_shared<controller::AutoController>(repos);
+
+    control->add_vehicle(1,"ID3", "VW", 2020, 25000, 40000, {1, 10}, 300);
+    control->add_vehicle(1,"Model Y", "Tesla", 2018, 80000, 38000, {1, 5}, 230);
+    control->remove_vehicle(1,"ID3", "VW", 2020, 25000, 40000, 300);
+    assert(repos->getallVehicles()[0].get_model() == "Model Y");
+    assert(repos->getallVehicles()[0].get_brand() == "Tesla");
+}
+
+void test_modify_vehicle() {
+    shared_ptr<repository::InMemory> repos = make_shared<repository::InMemory>();
+    shared_ptr<controller::AutoController> control = make_shared<controller::AutoController>(repos);
+
+    control->add_vehicle(1,"ID3", "VW", 2020, 25000, 40000, {1, 10}, 300);
+    control->modify_vehicle(1,3,"ID3", "VW", 2020, 29000, 40000, {1, 10}, 300);
+    assert(repos->getallVehicles()[0].get_mileage() == 29000);
+}
+
+void test_list_specific_model_brand() {
+    shared_ptr<repository::InMemory> repos = make_shared<repository::InMemory>();
+    shared_ptr<controller::AutoController> control = make_shared<controller::AutoController>(repos);
+
+    control->add_vehicle(1,"ID3", "VW", 2020, 25000, 40000, {1, 10}, 300);
+    control->add_vehicle(1,"ID4", "VW", 2019, 50000, 50000, {1, 30}, 350);
+    control->add_vehicle(1,"GrandSphere", "Audi", 2022, 1000, 100000, {1, 0}, 500);
+    control->add_vehicle(1,"Etron GT", "Audi", 2020, 70000, 80000, {1, 15}, 400);
+
+    vector<domain::Auto> filtered = {};
+    filtered = control->list_specific_model_brand(1,"", "VW");
+    assert(filtered[0].get_model() == "ID3");
+    assert(filtered[1].get_model() == "ID4");
+}
+
+void test_list_by_registration() {
+    shared_ptr<repository::InMemory> repos = make_shared<repository::InMemory>();
+    shared_ptr<controller::AutoController> control = make_shared<controller::AutoController>(repos);
+
+    control->add_vehicle(1,"ID3", "VW", 2020, 25000, 40000, {1, 10}, 300);
+    control->add_vehicle(1,"ID4", "VW", 2019, 50000, 50000, {1, 30}, 350);
+    control->add_vehicle(1,"GrandSphere", "Audi", 2022, 1000, 100000, {1, 0}, 500);
+
+    vector<domain::Auto> filtered = {};
+    filtered = control->list_by_registration(1,2020, 2022);
+    assert(filtered[0].get_model() == "ID3");
+    assert(filtered[1].get_model() == "GrandSphere");
+}
+
+void test_list_by_mileage() {
+    shared_ptr<repository::InMemory> repos = make_shared<repository::InMemory>();
+    shared_ptr<controller::AutoController> control = make_shared<controller::AutoController>(repos);
+
+    control->add_vehicle(1,"ID3", "VW", 2020, 25000, 40000, {1, 10}, 300);
+    control->add_vehicle(1,"ID4", "VW", 2019, 50000, 50000, {1, 30}, 350);
+    control->add_vehicle(1,"GrandSphere", "Audi", 2022, 1000, 100000, {1, 0}, 500);
+
+    vector<domain::Auto> filtered = {};
+    filtered = control->list_by_mileage(1,1, 30000);
+    assert(filtered[0].get_model() == "GrandSphere");
+    assert(filtered[1].get_model() == "ID3");
+}
+
+void test_list_by_price_ascending() {
+    shared_ptr<repository::InMemory> repos = make_shared<repository::InMemory>();
+    shared_ptr<controller::AutoController> control = make_shared<controller::AutoController>(repos);
+
+    control->add_vehicle(1,"ID3", "VW", 2020, 25000, 40000, {1, 10}, 300);
+    control->add_vehicle(1,"ID4", "VW", 2019, 50000, 50000, {1, 30}, 350);
+    control->add_vehicle(1,"GrandSphere", "Audi", 2022, 1000, 100000, {1, 0}, 500);
+
+    vector<domain::Auto> filtered = {};
+    filtered = control->list_by_price_ascending(1,45000, 150000);
+    assert(filtered[0].get_model() == "ID4");
+    assert(filtered[1].get_model() == "GrandSphere");
+}
+
+void test_add_favourite(){
+    shared_ptr<repository::InMemory> repos = make_shared<repository::InMemory>();
+    shared_ptr<controller::AutoController> control = make_shared<controller::AutoController>(repos);
+
+    control->add_vehicle(1,"ID3", "VW", 2020, 25000, 40000, {1, 10}, 300);
+    control->add_favourite(1,17);
+    assert(repos->get_fav()[0].get_model()=="ID3");
+    assert(repos->get_fav()[0].get_brand()=="VW");
+
+}
+
+namespace main_test{
+    void main(){
+
+        test_add_vehicle();
+        test_remove_vehicle();
+        test_modify_vehicle();
+        test_list_specific_model_brand();  //Testfunktionen
+        test_list_by_registration();
+        test_list_by_mileage();
+        test_list_by_price_ascending();
+        test_add_favourite();
+
+    }
+}

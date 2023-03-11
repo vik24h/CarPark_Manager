@@ -1,0 +1,20 @@
+# ninja log v5
+11	1633	6744823788816021	CMakeFiles/oop_lab5.dir/Domain.cpp.obj	fc8e2bff5131d6f9
+5	2117	6744823793668482	CMakeFiles/oop_lab5.dir/main.cpp.obj	1e852979fe09fa46
+28	1314	6738886293226931	CMakeFiles/oop_lab5.dir/Repository.cpp.obj	6e1de499ddf4c975
+25	1675	6744823789232037	CMakeFiles/oop_lab5.dir/InMemRepository.cpp.obj	58588bf7e406c1b
+39	1919	6744823791700530	CMakeFiles/oop_lab5.dir/UI.cpp.obj	e22e59a7a1a6f32d
+1453	2691	6738886306982771	oop_lab5.exe	2361e2d90bebf94a
+20	2055	6744823793072229	CMakeFiles/oop_lab5.dir/Controller.cpp.obj	ed4be813419c4e0d
+47	1870	6744823791201727	CMakeFiles/oop_lab5.dir/InFileRepository.cpp.obj	f9a6923cb521e875
+33	1962	6744823792105769	CMakeFiles/oop_lab5.dir/test.cpp.obj	31bb876ef7680142
+2	392	6744825076738701	build.ninja	c790717d692dc503
+8	1005	6744830242864433	CMakeFiles/oop_lab5.dir/test.cpp.obj	31bb876ef7680142
+3	1139	6744830244193178	CMakeFiles/oop_lab5.dir/main.cpp.obj	1e852979fe09fa46
+3	976	6744833487774213	CMakeFiles/oop_lab5.dir/main.cpp.obj	1e852979fe09fa46
+38	1829	6744835963516486	CMakeFiles/oop_lab5.dir/InMemRepository.cpp.obj	58588bf7e406c1b
+34	2018	6744835965681045	CMakeFiles/oop_lab5.dir/InFileRepository.cpp.obj	f9a6923cb521e875
+24	2158	6744835967191244	CMakeFiles/oop_lab5.dir/UI.cpp.obj	e22e59a7a1a6f32d
+29	2230	6744835967917696	CMakeFiles/oop_lab5.dir/test.cpp.obj	31bb876ef7680142
+12	2355	6744835969179457	CMakeFiles/oop_lab5.dir/Controller.cpp.obj	ed4be813419c4e0d
+5	2441	6744835970036117	CMakeFiles/oop_lab5.dir/main.cpp.obj	1e852979fe09fa46
